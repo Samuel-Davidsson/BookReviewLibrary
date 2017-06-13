@@ -1,38 +1,36 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SamsBookReviewLibary.Data;
 using SamsBookReviewLibary.Models;
+using SamsBookReviewLibary.Repositories;
 
 namespace SamsBookReviewLibary.Controllers
 {
     public class AuthorsController : Controller
     {
         private readonly AuthorContext _context;
-
-        public AuthorsController(AuthorContext context)
+        private readonly IAuthorRepository _authorRepo;
+        public AuthorsController(AuthorContext context, IAuthorRepository authorRepo)
         {
-            _context = context;    
+            _context = context;
+            _authorRepo = authorRepo;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Authors.ToListAsync());
+            return View(_authorRepo.Authors.ToList());
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors
-                .SingleOrDefaultAsync(m => m.AuthorID == id);
+            var author = _authorRepo.GetAuthorById(id);
             if (author == null)
             {
                 return NotFound();
@@ -49,25 +47,24 @@ namespace SamsBookReviewLibary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AuthorID,FirstName,LastName,BirthDate,Country,ImgThumbNail,Info")] Author author)
+        public IActionResult Create([Bind("AuthorID,FirstName,LastName,BirthDate,Country,ImgThumbNail,Info")] Author author)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(author);
-                await _context.SaveChangesAsync();
+                _authorRepo.Create(author);
                 return RedirectToAction("Index");
             }
             return View(author);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors.SingleOrDefaultAsync(m => m.AuthorID == id);
+            var author = _authorRepo.GetAuthorById(id);
             if (author == null)
             {
                 return NotFound();
@@ -77,7 +74,7 @@ namespace SamsBookReviewLibary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AuthorID,FirstName,LastName,BirthDate,Country,ImgThumbNail,Info")] Author author)
+        public IActionResult Edit(int id, [Bind("AuthorID,FirstName,LastName,BirthDate,Country,ImgThumbNail,Info")] Author author)
         {
             if (id != author.AuthorID)
             {
@@ -88,8 +85,7 @@ namespace SamsBookReviewLibary.Controllers
             {
                 try
                 {
-                    _context.Update(author);
-                    await _context.SaveChangesAsync();
+                    _authorRepo.Edit(author);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -107,16 +103,14 @@ namespace SamsBookReviewLibary.Controllers
             return View(author);
         }
 
-        // GET: Authors/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors
-                .SingleOrDefaultAsync(m => m.AuthorID == id);
+            var author = _authorRepo.GetAuthorById(id);
             if (author == null)
             {
                 return NotFound();
@@ -125,20 +119,18 @@ namespace SamsBookReviewLibary.Controllers
             return View(author);
         }
 
-        // POST: Authors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var author = await _context.Authors.SingleOrDefaultAsync(m => m.AuthorID == id);
-            _context.Authors.Remove(author);
-            await _context.SaveChangesAsync();
+            var author = _authorRepo.Authors.SingleOrDefault(m => m.AuthorID == id);
+            _authorRepo.Delete(author);
             return RedirectToAction("Index");
         }
 
         private bool AuthorExists(int id)
         {
-            return _context.Authors.Any(e => e.AuthorID == id);
+            return _authorRepo.Exist(id);
         }
     }
 }

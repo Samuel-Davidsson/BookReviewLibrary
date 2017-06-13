@@ -11,11 +11,11 @@ namespace SamsBookReviewLibary.Data
         {
             context.Database.EnsureCreated();
 
-            if (context.Authors.Any())
+            if (context.Authors.Any() && context.Reviews.Any())
             {
                 return;
             }
-
+            
             var author1 = new Author {FirstName = "Joanne", LastName = "Rowling", BirthDate = DateTime.Parse("1965-07-31"), Country = "England", Info = "Born in Yate, England, on July 31, 1965, J.K. Rowling came from humble economic means before writing Harry Potter and the Sorcerer's Stone, a children's fantasy novel. The work was an international hit and Rowling wrote six more books in the series, which sold hundreds of millions of copies and was adapted into a blockbuster film franchise. In 2012, Rowling released the novel The Casual Vacancy." };
             var author2 = new Author {FirstName = "Lillen", LastName = "Eriksson", BirthDate = DateTime.Parse("2001-10-10"), Country = "Sweden", Info = "Cool kis", ImgThumbNail="https://i.ytimg.com/vi/dhjx7iyQduI/maxresdefault.jpg"};
 

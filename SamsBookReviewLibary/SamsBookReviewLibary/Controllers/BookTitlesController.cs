@@ -1,31 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SamsBookReviewLibary.Data;
 using SamsBookReviewLibary.Models;
+using SamsBookReviewLibary.Repositories;
 
 namespace SamsBookReviewLibary.Controllers
 {
     public class BookTitlesController : Controller
     {
         private readonly AuthorContext _context;
-
-        public BookTitlesController(AuthorContext context)
+        private readonly IBookTitleRepository _bookRepo;
+        public BookTitlesController(AuthorContext context, IBookTitleRepository bookRepo)
         {
-            _context = context;    
+            _context = context;  
+            _bookRepo = bookRepo;
         }
 
-        // GET: BookTitles
         public async Task<IActionResult> Index()
         {
             return View(await _context.BookTitles.ToListAsync());
         }
 
-        // GET: BookTitles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,37 +40,33 @@ namespace SamsBookReviewLibary.Controllers
             return View(bookTitle);
         }
 
-        // GET: BookTitles/Create
+
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: BookTitles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookTitleID,Title,ReleaseDate,Language,Sypnosis,ImgThumbNail")] BookTitle bookTitle)
+        public IActionResult Create([Bind("BookTitleID,Title,ReleaseDate,Language,Sypnosis,ImgThumbNail")] BookTitle bookTitle)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bookTitle);
-                await _context.SaveChangesAsync();
+                _bookRepo.Create(bookTitle);
                 return RedirectToAction("Index");
             }
             return View(bookTitle);
         }
 
-        // GET: BookTitles/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var bookTitle = await _context.BookTitles.SingleOrDefaultAsync(m => m.BookTitleID == id);
+            var bookTitle = _bookRepo.GetBookTitleById(id);
             if (bookTitle == null)
             {
                 return NotFound();
@@ -81,12 +74,9 @@ namespace SamsBookReviewLibary.Controllers
             return View(bookTitle);
         }
 
-        // POST: BookTitles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookTitleID,Title,ReleaseDate,Language,Sypnosis,ImgThumbNail")] BookTitle bookTitle)
+        public IActionResult Edit(int id, [Bind("BookTitleID,Title,ReleaseDate,Language,Sypnosis,ImgThumbNail")] BookTitle bookTitle)
         {
             if (id != bookTitle.BookTitleID)
             {
@@ -97,8 +87,7 @@ namespace SamsBookReviewLibary.Controllers
             {
                 try
                 {
-                    _context.Update(bookTitle);
-                    await _context.SaveChangesAsync();
+                    _bookRepo.Edit(bookTitle);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,16 +105,15 @@ namespace SamsBookReviewLibary.Controllers
             return View(bookTitle);
         }
 
-        // GET: BookTitles/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var bookTitle = await _context.BookTitles
-                .SingleOrDefaultAsync(m => m.BookTitleID == id);
+            var bookTitle = _bookRepo.GetBookTitleById(id);
+                
             if (bookTitle == null)
             {
                 return NotFound();
@@ -134,20 +122,18 @@ namespace SamsBookReviewLibary.Controllers
             return View(bookTitle);
         }
 
-        // POST: BookTitles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var bookTitle = await _context.BookTitles.SingleOrDefaultAsync(m => m.BookTitleID == id);
-            _context.BookTitles.Remove(bookTitle);
-            await _context.SaveChangesAsync();
+            var bookTitle = _bookRepo.GetBookTitleById(id);
+            _bookRepo.Delete(bookTitle);
             return RedirectToAction("Index");
         }
 
         private bool BookTitleExists(int id)
         {
-            return _context.BookTitles.Any(e => e.BookTitleID == id);
+            return _bookRepo.Exist(id);
         }
     }
 }

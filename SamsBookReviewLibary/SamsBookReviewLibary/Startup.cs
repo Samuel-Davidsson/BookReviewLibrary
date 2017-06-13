@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SamsBookReviewLibary.Data;
 using Microsoft.EntityFrameworkCore;
+using SamsBookReviewLibary.Repositories;
 
 namespace SamsBookReviewLibary
 {
@@ -27,6 +28,9 @@ namespace SamsBookReviewLibary
         {
             services.AddDbContext<AuthorContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IAuthorRepository, AuthorRepository>();
+            services.AddTransient<IBookTitleRepository, BookTitleRepository>();
+            services.AddTransient<IReviewRepository, ReviewRepository>();
             // Add framework services.
             services.AddMvc();
         }

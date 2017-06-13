@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SamsBookReviewLibary.Data;
 using SamsBookReviewLibary.Models;
+using SamsBookReviewLibary.Repositories;
 
 namespace SamsBookReviewLibary.Controllers
 {
@@ -19,14 +20,12 @@ namespace SamsBookReviewLibary.Controllers
             _context = context;    
         }
 
-        // GET: AuthorBooks
         public async Task<IActionResult> Index()
         {
             var authorContext = _context.AuthorBooks.Include(a => a.Author).Include(a => a.BookTitle);
             return View(await authorContext.ToListAsync());
         }
 
-        // GET: AuthorBooks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,7 +45,6 @@ namespace SamsBookReviewLibary.Controllers
             return View(authorBooks);
         }
 
-        // GET: AuthorBooks/Create
         public IActionResult Create()
         {
             ViewData["AuthorID"] = new SelectList(_context.Authors, "AuthorID", "AuthorID");
@@ -54,9 +52,6 @@ namespace SamsBookReviewLibary.Controllers
             return View();
         }
 
-        // POST: AuthorBooks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AuthorBooksID,AuthorID,BookTitleID")] AuthorBooks authorBooks)
@@ -72,7 +67,6 @@ namespace SamsBookReviewLibary.Controllers
             return View(authorBooks);
         }
 
-        // GET: AuthorBooks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,9 +84,6 @@ namespace SamsBookReviewLibary.Controllers
             return View(authorBooks);
         }
 
-        // POST: AuthorBooks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AuthorBooksID,AuthorID,BookTitleID")] AuthorBooks authorBooks)
