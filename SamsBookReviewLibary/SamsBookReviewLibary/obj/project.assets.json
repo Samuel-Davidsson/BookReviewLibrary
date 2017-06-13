@@ -989,15 +989,13 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/1.0.4": {
+      "Microsoft.EntityFrameworkCore.Design/1.1.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.3",
-          "Microsoft.EntityFrameworkCore.Relational.Design": "1.0.4",
-          "System.AppContext": "4.1.0",
-          "System.Collections.NonGeneric": "4.0.1",
-          "System.IO": "4.1.0",
-          "System.IO.FileSystem": "4.0.1"
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.1",
+          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.2",
+          "NETStandard.Library": "1.6.1",
+          "System.Collections.NonGeneric": "4.3.0"
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll": {}
@@ -1022,10 +1020,11 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational.Design/1.0.4": {
+      "Microsoft.EntityFrameworkCore.Relational.Design/1.1.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "1.0.4"
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.2",
+          "NETStandard.Library": "1.6.1"
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll": {}
@@ -4940,16 +4939,16 @@
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Design/1.0.4": {
-      "sha512": "ximyR/1KrNZDAyQDblthnHLjEAD3NWgldSyTtNQ/YKbLAszhJ3rfGi0F/2VWKlrDcBbJXnTHRwCIHpWS1n4pBA==",
+    "Microsoft.EntityFrameworkCore.Design/1.1.2": {
+      "sha512": "TFbj0fFE5BWJptL0BKhYOED0QOqY4VxApeLn8r9q8cINxyEj0XgjORl/a3Cp96CeASE5zsQeyMwaQCBRH+roag==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.design/1.0.4",
+      "path": "microsoft.entityframeworkcore.design/1.1.2",
       "files": [
         "lib/net451/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.Design.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.1.0.4.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.1.1.2.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
@@ -4966,16 +4965,16 @@
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational.Design/1.0.4": {
-      "sha512": "KaIV9/0k0tRSesEbhKdjOJNjwPZLGhVzwhN3gf6U3xHLgRGYoGur8gSWd/Tzd86gMctFS26ofdk4+NP+H2lHNg==",
+    "Microsoft.EntityFrameworkCore.Relational.Design/1.1.2": {
+      "sha512": "pu2Jxndzv3slY6Ch9mdqVfL3AFhH5XzM02Rrnf9h5lKoViprYx1O+nNqT3BxmGrPkYadY9OddG2b9+sUO3Xuzw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational.design/1.0.4",
+      "path": "microsoft.entityframeworkcore.relational.design/1.1.2",
       "files": [
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.Design.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.Design.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.xml",
-        "microsoft.entityframeworkcore.relational.design.1.0.4.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.design.1.1.2.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.design.nuspec"
       ]
     },
@@ -10741,7 +10740,7 @@
       "Microsoft.AspNetCore >= 1.1.2",
       "Microsoft.AspNetCore.Mvc >= 1.1.3",
       "Microsoft.AspNetCore.StaticFiles >= 1.1.2",
-      "Microsoft.EntityFrameworkCore.Design >= 1.0.4",
+      "Microsoft.EntityFrameworkCore.Design >= 1.1.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 1.1.2",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 1.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 1.1.1",
@@ -10757,10 +10756,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Samuel\\Desktop\\SamsBookReviewLibary\\SamsBookReviewLibary\\SamsBookReviewLibary.csproj",
+      "projectUniqueName": "C:\\Users\\Samuel\\Desktop\\Labb3-MVC\\SamsBookReviewLibary\\SamsBookReviewLibary\\SamsBookReviewLibary.csproj",
       "projectName": "SamsBookReviewLibary",
-      "projectPath": "C:\\Users\\Samuel\\Desktop\\SamsBookReviewLibary\\SamsBookReviewLibary\\SamsBookReviewLibary.csproj",
-      "outputPath": "C:\\Users\\Samuel\\Desktop\\SamsBookReviewLibary\\SamsBookReviewLibary\\obj\\",
+      "projectPath": "C:\\Users\\Samuel\\Desktop\\Labb3-MVC\\SamsBookReviewLibary\\SamsBookReviewLibary\\SamsBookReviewLibary.csproj",
+      "outputPath": "C:\\Users\\Samuel\\Desktop\\Labb3-MVC\\SamsBookReviewLibary\\SamsBookReviewLibary\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
@@ -10792,7 +10791,7 @@
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
-            "version": "1.0.4"
+            "version": "[1.1.2, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
@@ -10805,7 +10804,7 @@
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
-            "version": "[1.1.2, )"
+            "version": "1.1.2"
           },
           "Microsoft.EntityFrameworkCore.SqlServer.Design": {
             "target": "Package",

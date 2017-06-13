@@ -13,7 +13,7 @@ namespace SamsBookReviewLibary.Models
         public string ImgThumbNail { get; set; }
         public string Info { get; set; }
 
-        ICollection<AuthorBooks> AuthorBooks { get; set; }
+        public ICollection<AuthorBooks> AuthorBooks { get; set; }
         
 
     }

@@ -12,8 +12,8 @@ namespace SamsBookReviewLibary.Models
         public string Sypnosis { get; set; }
         public string ImgThumbNail { get; set; }
 
-        ICollection<AuthorBooks> AuthorBooks { get; set; }
-        ICollection<BookTitleGenres> BookTitleGenres { get; set; }
-        ICollection<Reviews> Reviews { get; set; }
+        public ICollection<AuthorBooks> AuthorBooks { get; set; }
+        public ICollection<BookTitleGenres> BookTitleGenres { get; set; }
+        public ICollection<Reviews> Reviews { get; set; }
     }
 }

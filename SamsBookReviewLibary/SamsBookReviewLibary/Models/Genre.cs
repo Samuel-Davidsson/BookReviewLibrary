@@ -8,7 +8,7 @@ namespace SamsBookReviewLibary.Models
         public GenreType GenreType { get; set; }
         public string Description { get; set; }
 
-        ICollection<BookTitleGenres> BookTitleGenres { get; set; }
+        public ICollection<BookTitleGenres> BookTitleGenres { get; set; }
         
     }
     public enum GenreType
