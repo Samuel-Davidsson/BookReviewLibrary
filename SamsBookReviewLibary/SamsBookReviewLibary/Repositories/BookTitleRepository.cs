@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using SamsBookReviewLibary.Models;
 using SamsBookReviewLibary.Data;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +14,7 @@ namespace SamsBookReviewLibary.Repositories
         {
             _context = context;
         }
-        public IEnumerable<BookTitle> BookTitles => _context.BookTitles.Include(b => b.AuthorBooks).ToList();
+        public IEnumerable<BookTitle> BookTitles => _context.BookTitles.Include(b => b.AuthorBooks).Include(b =>b.BookTitleGenres). Include(b => b.Reviews).ToList();
 
         public void Create(BookTitle bookTitle)
         {
