@@ -1,0 +1,30 @@
+@model SamsBookReviewLibary.Models.BookTitleGenres
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookTitleGenres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookTitle.BookTitleID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genre.GenreID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookTitleGenresID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
