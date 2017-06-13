@@ -1,0 +1,9 @@
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\bin\Debug\netcoreapp1.1\SamsBookReviewLibary.deps.json
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\bin\Debug\netcoreapp1.1\SamsBookReviewLibary.runtimeconfig.json
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\bin\Debug\netcoreapp1.1\SamsBookReviewLibary.runtimeconfig.dev.json
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\bin\Debug\netcoreapp1.1\SamsBookReviewLibary.dll
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\obj\Debug\netcoreapp1.1\SamsBookReviewLibary.AssemblyInfo.cs
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\bin\Debug\netcoreapp1.1\SamsBookReviewLibary.pdb
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\obj\Debug\netcoreapp1.1\SamsBookReviewLibary.dll
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\obj\Debug\netcoreapp1.1\SamsBookReviewLibary.pdb
+C:\Users\Samuel\Desktop\SamsBookReviewLibary\SamsBookReviewLibary\obj\Debug\netcoreapp1.1\SamsBookReviewLibary.csprojResolveAssemblyReference.cache
