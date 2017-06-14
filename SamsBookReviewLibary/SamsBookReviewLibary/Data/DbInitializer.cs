@@ -28,6 +28,7 @@ namespace SamsBookReviewLibary.Data
 
             var book1 = new BookTitle {Title = "Harry Potter and the Sorcerer's Stone", Language = "English", Sypnosis = "Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School of Witchcraft and Wizardry.", ReleaseDate = DateTime.Parse("2001-04-11") };
             var book2 = new BookTitle { Title = "Harry Potter and the chamber of secrets", Language = "English", Sypnosis = "Harry Potter returns to Hogwarts", ReleaseDate = DateTime.Parse("2003-03-11") };
+
             var books = new BookTitle[]
             {
                 book1, book2

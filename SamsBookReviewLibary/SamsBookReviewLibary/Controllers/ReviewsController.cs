@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,15 +12,17 @@ namespace SamsBookReviewLibary.Controllers
     {
         private readonly AuthorContext _context;
         private readonly IReviewRepository _reviewRepo;
+        private readonly IBookTitleRepository _bookTitleRepo;
 
-        public ReviewsController(AuthorContext context, IReviewRepository reviewRepo)
+        public ReviewsController(AuthorContext context, IReviewRepository reviewRepo, IBookTitleRepository bookTitleRepo)
         {
             _context = context;
             _reviewRepo = reviewRepo;
+            _bookTitleRepo = bookTitleRepo;
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var authorRepo = _reviewRepo.Reviews;
             return View(authorRepo.ToList());
@@ -36,7 +35,7 @@ namespace SamsBookReviewLibary.Controllers
                 return NotFound();
             }
 
-            var reviews = _reviewRepo.GetReviewById(id);
+            var reviews = _reviewRepo.Reviews.FirstOrDefault(r =>r.ReviewsID == id);
             if (reviews == null)
             {
                 return NotFound();
@@ -48,7 +47,7 @@ namespace SamsBookReviewLibary.Controllers
 
         public IActionResult Create()
         {
-            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title");
+            ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title");
             return View();
         }
 
@@ -62,7 +61,7 @@ namespace SamsBookReviewLibary.Controllers
                 _reviewRepo.Create(reviews);
                 return RedirectToAction("Index");
             }
-            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title", reviews.BookTitleID);
+            ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title", reviews.BookTitleID);
             return View(reviews);
         }
 
@@ -78,7 +77,7 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title", reviews.BookTitleID);
+            ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title", reviews.BookTitleID);
             return View(reviews);
         }
 
@@ -111,7 +110,7 @@ namespace SamsBookReviewLibary.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title", reviews.BookTitleID);
+            ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title", reviews.BookTitleID);
             return View(reviews);
         }
 
@@ -121,10 +120,8 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
-
-            var reviews = _context.Reviews
-                .Include(r => r.BookTitle)
-                .SingleOrDefaultAsync(m => m.ReviewsID == id);
+            var reviews = _reviewRepo.Reviews
+                .SingleOrDefault(m => m.ReviewsID == id);
             if (reviews == null)
             {
                 return NotFound();
