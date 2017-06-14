@@ -3,33 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SamsBookReviewLibary.Repositories;
+using SamsBookReviewLibary.ViewModels;
 
 namespace SamsBookReviewLibary.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IBookTitleRepository _bookrepo;
+
+        public HomeController(IBookTitleRepository bookrepo)
         {
-            return View();
+            _bookrepo = bookrepo;
         }
-
-        public IActionResult About()
+        public ViewResult Index()
         {
-            ViewData["Message"] = "Your application description page.";
+            var homeViewModel = new HomeViewModel
+            {
+                BookTitles = _bookrepo.BookTitles
+            };
+            return View(homeViewModel);
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
         }
     }
 }
