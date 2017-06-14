@@ -33,7 +33,7 @@ namespace SamsBookReviewLibary.Repositories
 
         public IEnumerable<Author> GetAll()
         {
-            var authors = _context.Authors.Select(a => a);
+            var authors = _context.Authors.Include(a => a.AuthorBooks).ToList();
             return (authors);
         }
 

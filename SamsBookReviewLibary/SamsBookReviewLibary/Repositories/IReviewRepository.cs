@@ -18,5 +18,7 @@ namespace SamsBookReviewLibary.Repositories
         void Delete(Reviews review);
 
         bool Exist(int id);
+
+        Reviews GetByIdIncluded(int id);
     }
 }

@@ -23,15 +23,14 @@ namespace SamsBookReviewLibary.Controllers
             return View(await _context.BookTitles.ToListAsync());
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var bookTitle = await _context.BookTitles
-                .SingleOrDefaultAsync(m => m.BookTitleID == id);
+            var bookTitle = _bookRepo.GetBookTitleById(id);
             if (bookTitle == null)
             {
                 return NotFound();

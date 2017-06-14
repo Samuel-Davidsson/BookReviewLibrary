@@ -26,14 +26,14 @@ namespace SamsBookReviewLibary.Controllers
         }
 
         // GET: Genres/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var genre = await _context.Genres
+            var genre = _context.Genres
                 .SingleOrDefaultAsync(m => m.GenreID == id);
             if (genre == null)
             {

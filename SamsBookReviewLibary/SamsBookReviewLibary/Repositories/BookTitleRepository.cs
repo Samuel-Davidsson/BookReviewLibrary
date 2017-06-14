@@ -41,7 +41,7 @@ namespace SamsBookReviewLibary.Repositories
 
         public IEnumerable<BookTitle> GetAll()
         {
-           var authors = _context.BookTitles.Select(b => b);
+            var authors = _context.BookTitles.Include(b => b.AuthorBooks).Include(b => b.BookTitleGenres).Include(b => b.Reviews).ToList();
             return (authors);
         }
 

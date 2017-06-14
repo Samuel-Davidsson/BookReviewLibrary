@@ -16,6 +16,7 @@ namespace SamsBookReviewLibary.Repositories
         {
             _context = context;
         }
+
         public IEnumerable<Reviews> Reviews => _context.Reviews.Include(r => r.BookTitle).ToList();
 
         public void Create(Reviews review)
@@ -43,7 +44,7 @@ namespace SamsBookReviewLibary.Repositories
 
         public IEnumerable<Reviews> GetAll()
         {
-            var reviews = _context.Reviews.Select(r => r);
+            var reviews = _context.Reviews.Include(r => r.BookTitle).ToList();
             return (reviews);
         }
 
@@ -51,6 +52,10 @@ namespace SamsBookReviewLibary.Repositories
         {
             var review = _context.Reviews.SingleOrDefault(r => r.ReviewsID == reviewId);
             return review;
+        }
+        public Reviews GetByIdIncluded(int id)
+        {
+            return _context.Reviews.Include(r => r.BookTitle).FirstOrDefault(r => r.ReviewsID == id);
         }
     }
 }

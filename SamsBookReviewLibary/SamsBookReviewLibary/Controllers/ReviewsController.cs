@@ -7,36 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SamsBookReviewLibary.Data;
 using SamsBookReviewLibary.Models;
+using SamsBookReviewLibary.Repositories;
 
 namespace SamsBookReviewLibary.Controllers
 {
     public class ReviewsController : Controller
     {
         private readonly AuthorContext _context;
+        private readonly IReviewRepository _reviewRepo;
 
-        public ReviewsController(AuthorContext context)
+        public ReviewsController(AuthorContext context, IReviewRepository reviewRepo)
         {
-            _context = context;    
+            _context = context;
+            _reviewRepo = reviewRepo;
         }
 
-        // GET: Reviews
+
         public async Task<IActionResult> Index()
         {
-            var authorContext = _context.Reviews.Include(r => r.BookTitle);
-            return View(await authorContext.ToListAsync());
+            var authorRepo = _reviewRepo.Reviews;
+            return View(authorRepo.ToList());
         }
 
-        // GET: Reviews/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var reviews = await _context.Reviews
-                .Include(r => r.BookTitle)
-                .SingleOrDefaultAsync(m => m.ReviewsID == id);
+            var reviews = _reviewRepo.GetReviewById(id);
             if (reviews == null)
             {
                 return NotFound();
@@ -45,53 +45,47 @@ namespace SamsBookReviewLibary.Controllers
             return View(reviews);
         }
 
-        // GET: Reviews/Create
+
         public IActionResult Create()
         {
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID");
+            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title");
             return View();
         }
 
-        // POST: Reviews/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReviewsID,BookTitleID,Rating,Summary")] Reviews reviews)
+        public IActionResult Create([Bind("ReviewsID,BookTitleID,Rating,Summary")] Reviews reviews)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reviews);
-                await _context.SaveChangesAsync();
+                _reviewRepo.Create(reviews);
                 return RedirectToAction("Index");
             }
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID", reviews.BookTitleID);
+            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title", reviews.BookTitleID);
             return View(reviews);
         }
 
-        // GET: Reviews/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var reviews = await _context.Reviews.SingleOrDefaultAsync(m => m.ReviewsID == id);
+            var reviews = _reviewRepo.GetReviewById(id);
             if (reviews == null)
             {
                 return NotFound();
             }
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID", reviews.BookTitleID);
+            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title", reviews.BookTitleID);
             return View(reviews);
         }
 
-        // POST: Reviews/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReviewsID,BookTitleID,Rating,Summary")] Reviews reviews)
+        public IActionResult Edit(int id, [Bind("ReviewsID,BookTitleID,Rating,Summary")] Reviews reviews)
         {
             if (id != reviews.ReviewsID)
             {
@@ -102,8 +96,7 @@ namespace SamsBookReviewLibary.Controllers
             {
                 try
                 {
-                    _context.Update(reviews);
-                    await _context.SaveChangesAsync();
+                    _reviewRepo.Edit(reviews);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,19 +111,18 @@ namespace SamsBookReviewLibary.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID", reviews.BookTitleID);
+            ViewData["BookTitleID"] = new SelectList(_reviewRepo.Reviews, "BookTitleID", "Title", reviews.BookTitleID);
             return View(reviews);
         }
 
-        // GET: Reviews/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var reviews = await _context.Reviews
+            var reviews = _context.Reviews
                 .Include(r => r.BookTitle)
                 .SingleOrDefaultAsync(m => m.ReviewsID == id);
             if (reviews == null)
@@ -141,20 +133,19 @@ namespace SamsBookReviewLibary.Controllers
             return View(reviews);
         }
 
-        // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var reviews = await _context.Reviews.SingleOrDefaultAsync(m => m.ReviewsID == id);
-            _context.Reviews.Remove(reviews);
-            await _context.SaveChangesAsync();
+            var reviews = _reviewRepo.GetReviewById(id);
+            _reviewRepo.Delete(reviews);
+
             return RedirectToAction("Index");
         }
 
         private bool ReviewsExists(int id)
         {
-            return _context.Reviews.Any(e => e.ReviewsID == id);
+            return _reviewRepo.Exist(id);
         }
     }
 }

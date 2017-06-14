@@ -19,14 +19,13 @@ namespace SamsBookReviewLibary.Controllers
             _context = context;    
         }
 
-        // GET: BookTitleGenres
+
         public async Task<IActionResult> Index()
         {
             var authorContext = _context.BookTitleGenres.Include(b => b.BookTitle).Include(b => b.Genre);
             return View(await authorContext.ToListAsync());
         }
 
-        // GET: BookTitleGenres/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
