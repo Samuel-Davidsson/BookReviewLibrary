@@ -16,11 +16,14 @@ namespace SamsBookReviewLibary.Controllers
         {
             _bookrepo = bookrepo;
         }
+
+
         public ViewResult Index()
         {
             var homeViewModel = new HomeViewModel
             {
                 BookTitles = _bookrepo.BookTitles
+            
             };
             return View(homeViewModel);
 

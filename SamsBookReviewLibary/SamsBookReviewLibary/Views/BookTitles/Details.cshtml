@@ -1,51 +1,43 @@
 @model SamsBookReviewLibary.Models.BookTitle
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "BookDetails";
 }
 
-<h2>Details</h2>
+<h2>Book Details</h2>
 
 <div>
-    <h4>BookTitle</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
+    <p>
+        <img src="@Model.ImgThumbNail" alt="@Model.Title Picture" />
+    </p>
+</div>
+<div class="thumbnail" align="left">
+    <dl>
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.Title):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.DisplayNameFor(model => model.ReleaseDate):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
+            @Model.ReleaseDate.ToString("yyyy-mm-dd")
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Language)
+            @Html.DisplayNameFor(model => model.Language):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Language)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Sypnosis)
+            @Html.DisplayNameFor(model => model.Sypnosis):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Sypnosis)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImgThumbNail)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImgThumbNail)
-        </dd>
     </dl>
-</div>
-<div>
-    <p>
-        <img src="@Model.ImgThumbNail" alt="@Model.Title Picture" />
-    </p>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.BookTitleID">Edit</a> |

@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url('../images/background.jpg');
 }
 
 /* Wrapping element */
@@ -8,6 +9,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: lightgray;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -34,14 +36,18 @@ textarea {
     /* Hide captions */
     .carousel-caption {
         display: none;
-    }
+    }   
+}
+.slide-image{
+    min-height: 300px;
+    max-height: 300px;
+}
+#carousel-example-generic{
+    max-width: 400px;
+    margin: 25px;
+}
 
-    .ImgSizeMain {
-        overflow: hidden;
-        position: relative;
-        max-height: 50px;
-        max-width: 50px;
-        
-    }
-
+#test {
+    border-color: lightgray;
+    background-color: lightgray;
 }
