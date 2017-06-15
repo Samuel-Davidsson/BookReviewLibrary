@@ -1,4 +1,4 @@
-@model SamsBookReviewLibary.Models.Author
+@model Author
 
 @{
     ViewData["Title"] = "Details";
@@ -45,13 +45,27 @@
         </dd>
     </dl>
     <p>
-        <h3>Written Books:</h3>
-        @foreach (var bag in ViewBag.AuthorBooks)
-        {
-            <div><b>@bag</b></div>
-
-        }
+        <h3>
+           WrittenBooks:
+        </h3>
     </p>
+        @if (ViewBag.AuthorBooks.Count > 0)
+        {
+            @foreach (var books in ViewBag.AuthorBooks)
+            {
+                <div>
+                    <a asp-controller="BookTitles" asp-action="Details" asp-route-id="@books.BookTitleID">@books.Title</a>
+
+                </div>
+            }
+        }
+
+        else
+        {
+            <div>No @Html.DisplayNameFor(Model => Model.AuthorBooks) was found. </div>
+        }
+
+    
 </div>
 <div>
     <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.AuthorID">Edit</a> 
