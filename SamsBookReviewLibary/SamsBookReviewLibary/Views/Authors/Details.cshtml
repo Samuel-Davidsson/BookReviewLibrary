@@ -49,10 +49,11 @@
         @foreach (var bag in ViewBag.AuthorBooks)
         {
             <div><b>@bag</b></div>
+
         }
     </p>
 </div>
 <div>
-    <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.AuthorID">Edit</a> |
+    <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.AuthorID">Edit</a> 
     <a asp-action="Index" class="btn btn-default">Back to List</a>
 </div>

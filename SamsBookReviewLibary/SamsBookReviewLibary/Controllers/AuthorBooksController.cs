@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SamsBookReviewLibary.Data;
 using SamsBookReviewLibary.Models;
-using SamsBookReviewLibary.Repositories;
 
 namespace SamsBookReviewLibary.Controllers
 {
@@ -22,7 +19,7 @@ namespace SamsBookReviewLibary.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var authorContext = _context.AuthorBooks.Include(a => a.Author).Include(a => a.BookTitle);
+            var authorContext = _context.AuthorBooks.Include(a => a.Author).Include(a => a.BookTitle).OrderBy(a => a.Author.FirstName);
             return View(await authorContext.ToListAsync());
         }
 
@@ -47,8 +44,8 @@ namespace SamsBookReviewLibary.Controllers
 
         public IActionResult Create()
         {
-            ViewData["AuthorID"] = new SelectList(_context.Authors, "AuthorID", "AuthorID");
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID");
+            ViewData["AuthorID"] = new SelectList(_context.Authors.OrderBy(a =>a.FirstName), "AuthorID", "FirstName");
+            ViewData["BookTitleID"] = new SelectList(_context.BookTitles.OrderBy(b =>b.Title), "BookTitleID", "Title");
             return View();
         }
 
@@ -62,8 +59,8 @@ namespace SamsBookReviewLibary.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Authors, "AuthorID", "AuthorID", authorBooks.AuthorID);
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID", authorBooks.BookTitleID);
+            ViewData["AuthorID"] = new SelectList(_context.Authors.OrderBy(a =>a.FirstName), "AuthorID", "FirstName", authorBooks.AuthorID);
+            ViewData["BookTitleID"] = new SelectList(_context.BookTitles.OrderBy(b =>b.Title), "BookTitleID", "Title", authorBooks.BookTitleID);
             return View(authorBooks);
         }
 
@@ -79,8 +76,8 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(_context.Authors, "AuthorID", "AuthorID", authorBooks.AuthorID);
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID", authorBooks.BookTitleID);
+            ViewData["AuthorID"] = new SelectList(_context.Authors.OrderBy(a => a.FirstName), "AuthorID", "FirstName", authorBooks.AuthorID);
+            ViewData["BookTitleID"] = new SelectList(_context.BookTitles.OrderBy(b =>b.Title), "BookTitleID", "Title", authorBooks.BookTitleID);
             return View(authorBooks);
         }
 
@@ -113,12 +110,11 @@ namespace SamsBookReviewLibary.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Authors, "AuthorID", "AuthorID", authorBooks.AuthorID);
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID", authorBooks.BookTitleID);
+            ViewData["AuthorID"] = new SelectList(_context.Authors.OrderBy(a => a.FirstName), "AuthorID", "FirstName", authorBooks.AuthorID);
+            ViewData["BookTitleID"] = new SelectList(_context.BookTitles.OrderBy(b =>b.Title), "BookTitleID", "Title", authorBooks.BookTitleID);
             return View(authorBooks);
         }
 
-        // GET: AuthorBooks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,8 +133,7 @@ namespace SamsBookReviewLibary.Controllers
 
             return View(authorBooks);
         }
-
-        // POST: AuthorBooks/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

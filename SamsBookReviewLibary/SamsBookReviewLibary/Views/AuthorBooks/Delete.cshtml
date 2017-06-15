@@ -4,11 +4,10 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Delete Authors books</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>AuthorBooks</h4>
     <hr />
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="AuthorBooksID" />
@@ -16,20 +15,21 @@
             @Html.DisplayNameFor(model => model.Author)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Author.AuthorID)
+            @Html.DisplayFor(model => model.Author.FirstName)
+            @Html.DisplayFor(model => model.Author.LastName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.BookTitle)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BookTitle.BookTitleID)
+            @Html.DisplayFor(model => model.BookTitle.Title)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Delete" class="btn btn-default" />
+            <a asp-action="Index" class="btn btn-default">Back to List</a>
         </div>
     </form>
 </div>

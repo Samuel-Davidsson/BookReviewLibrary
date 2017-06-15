@@ -4,27 +4,30 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Authors books details</h2>
 
-<div>
-    <h4>AuthorBooks</h4>
+<div class=form-horizontal>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.Author):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Author.AuthorID)
+            @Html.DisplayFor(model => model.Author.FirstName)
+            @Html.DisplayFor(model => model.Author.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BookTitle)
+            @Html.DisplayNameFor(model => model.BookTitle):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BookTitle.BookTitleID)
+            @Html.DisplayFor(model => model.BookTitle.Title)
         </dd>
     </dl>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+        <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.AuthorBooksID">Edit</a>
+        <a asp-action="Index" class="btn btn-default">Back to List</a>
+    </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.AuthorBooksID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
