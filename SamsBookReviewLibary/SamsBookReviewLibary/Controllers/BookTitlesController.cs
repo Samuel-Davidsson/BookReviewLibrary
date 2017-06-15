@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SamsBookReviewLibary.Data;
 using SamsBookReviewLibary.Models;
 using SamsBookReviewLibary.Repositories;
+using System;
 
 namespace SamsBookReviewLibary.Controllers
 {
@@ -29,6 +30,17 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
+            var listOfAuthors = _context.AuthorBooks.Where(r => r.BookTitleID == id).Select(r => r.Author).ToList();
+            ViewBag.AuthorBooks = listOfAuthors;
+
+            //var listOfEnum = Enum.GetValues(typeof(Rating)).Cast<Rating>().ToList();
+
+            var listOfReviews = _context.Reviews.Where(r => r.BookTitleID == id).ToList();
+            var list = listOfReviews.ToList();
+            ViewBag.Reviews = list;
+
+            var listOfGenre = _context.BookTitleGenres.Where(r => r.BookTitleID == id).Select(r => r.Genre).ToList();
+            ViewBag.Genres = listOfGenre;
 
             var bookTitle = _bookRepo.GetBookTitleById(id);
             if (bookTitle == null)

@@ -38,7 +38,51 @@
             @Html.DisplayFor(model => model.Sypnosis)
         </dd>
     </dl>
+    <p>
+    <h4>
+        Author:
+    </h4>
+    </p>
+    @if (ViewBag.AuthorBooks.Count > 0)
+    {
+        @foreach (var authors in ViewBag.AuthorBooks)
+        {
+            <div>
+                <a asp-controller="Authors" asp-action="Details" asp-route-id="@authors.AuthorID">@authors.LastName</a>
+            </div>
+        }
+    }
+
+    else
+    {
+        <div>No @Html.DisplayNameFor(Model => Model.AuthorBooks) was found. </div>
+    }
+
+    <h4>
+        Genre:
+    </h4>
+
+        @foreach (var genres in ViewBag.Genres)
+        {
+            <div>
+                <p>@genres.GenreType</p>
+            </div>
+        }
+
+    <h4>
+        Reviews:
+    </h4>
+
+    @foreach (var reviews in ViewBag.Reviews)
+    {
+        <div>
+            <p>@reviews.Rating</p>
+        </div>
+    }
+    
 </div>
+
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.BookTitleID">Edit</a> |
     <a asp-action="Index">Back to List</a>

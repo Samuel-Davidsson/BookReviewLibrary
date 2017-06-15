@@ -6,6 +6,5 @@ namespace SamsBookReviewLibary.ViewModels
     public class HomeViewModel
     {
         public IEnumerable<BookTitle> BookTitles { get; set; }
-        public IEnumerable<Author> Authors { get; set; }
     }
 }
