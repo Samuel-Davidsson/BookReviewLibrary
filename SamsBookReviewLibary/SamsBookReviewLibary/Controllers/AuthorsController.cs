@@ -29,7 +29,8 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
-
+            var listOfBooks = _context.AuthorBooks.Where(r => r.AuthorID == id).Select(r => r.BookTitle.Title);
+            ViewBag.AuthorBooks = listOfBooks;
             var author = _authorRepo.GetAuthorById(id);
             if (author == null)
             {

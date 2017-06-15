@@ -1,7 +1,7 @@
 @model BookTitle
 
 <div class="col-sm-4 col-lg-4 col-md-4">
-    <div id="test" class="thumbnail">
+    <div class="thumbnail" id="test" >
         <img src="@Model.ImgThumbNail" alt="">
         <div class="caption">
                 <a asp-controller="BookTitles" asp-action="Details" asp-route-id="@Model.BookTitleID">@Model.Title</a>

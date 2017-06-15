@@ -7,53 +7,47 @@
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Author</h4>
+<div class="thumbnail" align="left" id="test">
+    <h3>Author:</h3>
     <hr />
-    <dl class="dl-horizontal">
+    <div></div>
+    <dl>
         <input type="hidden" asp-for="AuthorID" />
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.FirstName);
         </dt>
         <dd>
             @Html.DisplayFor(model => model.FirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.LastName);
         </dt>
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
+            @Html.DisplayNameFor(model => model.BirthDate);
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BirthDate)
+            @Model.BirthDate.ToString("yyyy-mm-dd");
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Country)
+            @Html.DisplayNameFor(model => model.Country);
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Country)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ImgThumbNail)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImgThumbNail)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Info)
+            @Html.DisplayNameFor(model => model.Info);
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Info)
         </dd>
     </dl>
-    
+</div>
     <form asp-action="Delete">
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <a asp-action="Index" class="btn btn-default">Back to List</a>
         </div>
     </form>
-</div>

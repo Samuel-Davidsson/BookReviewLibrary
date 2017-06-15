@@ -4,51 +4,55 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
-
+<h2>AuthorDetails</h2>
 <div>
-    <h4>Author</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+    <p>
+        <img src="@Model.ImgThumbNail" alt="@Model.FirstName, @Model.LastName Picture" />
+    </p>
+</div>
+<div class="thumbnail" align="left" id="test">
+    <dl>
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.FirstName):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.LastName):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.BirthDate):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BirthDate)
+            @Model.BirthDate.ToString("yyyy-mm-dd")
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.Country):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Country)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.ImgThumbNail)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImgThumbNail)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Info)
+            @Html.DisplayNameFor(model => model.Info):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Info)
         </dd>
     </dl>
+    <p>
+        <h3>Written Books:</h3>
+        @foreach (var bag in ViewBag.AuthorBooks)
+        {
+            <div><b>@bag</b></div>
+        }
+    </p>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.AuthorID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.AuthorID">Edit</a> |
+    <a asp-action="Index" class="btn btn-default">Back to List</a>
 </div>
