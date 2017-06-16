@@ -13,22 +13,22 @@
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="ReviewsID" />
         <dt>
-            @Html.DisplayNameFor(model => model.Rating)
+            @Html.DisplayNameFor(model => model.BookTitle):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Rating)
+            @Html.DisplayFor(model => model.BookTitle.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Summary)
+            @Html.DisplayNameFor(model => model.Ratings):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ratings)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Summary)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BookTitle)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BookTitle.BookTitleID)
         </dd>
     </dl>
     

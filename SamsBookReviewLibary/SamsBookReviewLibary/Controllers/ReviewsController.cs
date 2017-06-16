@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -47,26 +48,36 @@ namespace SamsBookReviewLibary.Controllers
 
         public IActionResult Create()
         {
+            var reviewTypes = GetReviewTypes();
+
+            ViewData["Ratings"] = new SelectList(reviewTypes, "Id", "Value");
             ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title");
             return View();
         }
 
+        private dynamic GetReviewTypes()
+        {
+            return Enum.GetValues(typeof(Rating)).Cast<Rating>().ToList()
+                .Select(x => new { Id = x.ToString(), Value = x.ToString() });
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ReviewsID,BookTitleID,Rating,Summary")] Reviews reviews)
+        public IActionResult Create([Bind("ReviewsID,BookTitleID,Ratings,Summary")] Reviews reviews)
         {
             if (ModelState.IsValid)
             {
                 _reviewRepo.Create(reviews);
                 return RedirectToAction("Index");
             }
-            ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title", reviews.BookTitleID);
+            ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title");
+            ViewData["Ratings"] = new SelectList(GetReviewTypes(), "Id", "Value");
             return View(reviews);
         }
 
         public IActionResult Edit(int id)
         {
+            var reviewTypes = GetReviewTypes();
             if (id == 0)
             {
                 return NotFound();
@@ -77,14 +88,16 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
+
             ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title", reviews.BookTitleID);
+            ViewData["Ratings"] = new SelectList(reviewTypes, "Id", "Value");
             return View(reviews);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ReviewsID,BookTitleID,Rating,Summary")] Reviews reviews)
+        public IActionResult Edit(int id, [Bind("ReviewsID,BookTitleID,Ratings,Summary")] Reviews reviews)
         {
             if (id != reviews.ReviewsID)
             {
@@ -108,6 +121,7 @@ namespace SamsBookReviewLibary.Controllers
                         throw;
                     }
                 }
+                ViewData["GenreTypes"] = new SelectList(GetReviewTypes(), "Id", "Value");
                 return RedirectToAction("Index");
             }
             ViewData["BookTitleID"] = new SelectList(_bookTitleRepo.BookTitles, "BookTitleID", "Title", reviews.BookTitleID);
