@@ -13,13 +13,13 @@
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="GenreID" />
         <dt>
-            @Html.DisplayNameFor(model => model.GenreType)
+            @Html.DisplayNameFor(model => model.GenreTypes):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.GenreType)
+            @Model.GenreTypes.ToString()
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Description):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Description)

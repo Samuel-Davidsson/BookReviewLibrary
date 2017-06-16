@@ -9,9 +9,10 @@ using SamsBookReviewLibary.Models;
 namespace SamsBookReviewLibary.Migrations
 {
     [DbContext(typeof(AuthorContext))]
-    partial class AuthorContextModelSnapshot : ModelSnapshot
+    [Migration("20170616110827_init4")]
+    partial class init4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

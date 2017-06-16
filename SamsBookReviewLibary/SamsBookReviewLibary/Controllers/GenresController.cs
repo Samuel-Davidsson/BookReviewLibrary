@@ -19,13 +19,11 @@ namespace SamsBookReviewLibary.Controllers
             _context = context;    
         }
 
-        // GET: Genres
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Genres.ToListAsync());
+            return View(_context.Genres.ToList());
         }
 
-        // GET: Genres/Details/5
         public IActionResult Details(int id)
         {
             if (id == 0)
@@ -34,7 +32,7 @@ namespace SamsBookReviewLibary.Controllers
             }
 
             var genre = _context.Genres
-                .SingleOrDefaultAsync(m => m.GenreID == id);
+                .SingleOrDefault(m => m.GenreID == id);
             if (genre == null)
             {
                 return NotFound();
@@ -43,31 +41,42 @@ namespace SamsBookReviewLibary.Controllers
             return View(genre);
         }
 
-        // GET: Genres/Create
         public IActionResult Create()
         {
+            var genreTypes = GetGenreTypes();
+            
+            ViewData["GenreTypes"] = new SelectList(genreTypes, "Id", "Value");
+            
             return View();
         }
 
-        // POST: Genres/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        private dynamic GetGenreTypes()
+        {
+            return Enum.GetValues(typeof(GenreType)).Cast<GenreType>().ToList()
+                .Select(x => new { Id = x.ToString(), Value = x.ToString() });
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GenreID,GenreType,Description")] Genre genre)
+        public async Task<IActionResult> Create([Bind("GenreID,GenreTypes,Description")] Genre genre)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(genre);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+            ViewData["GenreTypes"] = new SelectList(GetGenreTypes(), "Id", "Value");
             return View(genre);
+
         }
 
-        // GET: Genres/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var genreTypes = GetGenreTypes();
             if (id == null)
             {
                 return NotFound();
@@ -78,15 +87,13 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
+            ViewData["GenreTypes"] = new SelectList(GetGenreTypes(), "Id", "Value");
             return View(genre);
         }
 
-        // POST: Genres/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GenreID,GenreType,Description")] Genre genre)
+        public async Task<IActionResult> Edit(int id, [Bind("GenreID,GenreTypes,Description")] Genre genre)
         {
             if (id != genre.GenreID)
             {
@@ -113,12 +120,13 @@ namespace SamsBookReviewLibary.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewData["GenreTypes"] = new SelectList(GetGenreTypes(), "Id", "Value");
             return View(genre);
         }
 
-        // GET: Genres/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var genreTypes = GetGenreTypes();
             if (id == null)
             {
                 return NotFound();
@@ -130,11 +138,10 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["GenreTypes"] = new SelectList(GetGenreTypes(), "Id", "Value");
             return View(genre);
         }
 
-        // POST: Genres/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

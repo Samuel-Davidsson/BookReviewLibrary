@@ -5,7 +5,7 @@
         public int ReviewsID { get; set; }
         public int BookTitleID { get; set; }
         public BookTitle BookTitle { get; set; }
-        public Rating Rating { get; set; }
+        public Rating Ratings { get; set; }
         public string Summary { get; set; }
     }
     public enum Rating

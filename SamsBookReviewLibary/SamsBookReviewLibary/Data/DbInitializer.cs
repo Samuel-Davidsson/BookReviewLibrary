@@ -57,9 +57,9 @@ namespace SamsBookReviewLibary.Data
             context.AuthorBooks.AddRange(authorBooks);
             context.SaveChanges();
 
-            var genre1 = new Genre {GenreType = GenreType.Fantasy, Description = "Dragons magic trolls and orcs" };
-            var genre2 = new Genre {GenreType = GenreType.Thriller, Description = "Folkets favorit" };
-            var genre3 = new Genre { GenreType = GenreType.Horror, Description = "Scary!" };
+            var genre1 = new Genre { GenreTypes = GenreType.Fantasy, Description = "Dragons magic trolls and orcs" };
+            var genre2 = new Genre { GenreTypes = GenreType.Thriller, Description = "Folkets favorit" };
+            var genre3 = new Genre { GenreTypes = GenreType.Horror, Description = "Scary!" };
             var genres = new Genre[]
             {
                genre1, genre2, genre3
@@ -84,10 +84,10 @@ namespace SamsBookReviewLibary.Data
             context.SaveChanges();
 
 
-            var review1 = new Reviews { BookTitle = book1, Rating = Rating.Outstanding, Summary = "A very good book exciting and loads of magic" };
-            var review2 = new Reviews { BookTitle = book1, Rating = Rating.Excellent, Summary = "Love it epic story" };
-            var review3 = new Reviews { BookTitle = book8, Rating = Rating.Excellent, Summary = "Great book scare and really makes me tingle" };
-            var review4 = new Reviews { BookTitle = book5, Rating = Rating.Bad, Summary = "Didnt like this book at all slow pacing and didnt make alot of sense at the end" };
+            var review1 = new Reviews { BookTitle = book1, Ratings = Rating.Outstanding, Summary = "A very good book exciting and loads of magic" };
+            var review2 = new Reviews { BookTitle = book1, Ratings = Rating.Excellent, Summary = "Love it epic story" };
+            var review3 = new Reviews { BookTitle = book8, Ratings = Rating.Excellent, Summary = "Great book scare and really makes me tingle" };
+            var review4 = new Reviews { BookTitle = book5, Ratings = Rating.Bad, Summary = "Didnt like this book at all slow pacing and didnt make alot of sense at the end" };
             var reviews = new Reviews[]
             {
                review1, review2, review3, review4             

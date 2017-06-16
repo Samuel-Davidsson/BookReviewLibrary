@@ -13,10 +13,10 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.GenreType)
+                    @Html.DisplayNameFor(model => model.GenreTypes):
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.Description):
                 </th>
             <th></th>
         </tr>
@@ -25,7 +25,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.GenreType)
+                @Html.DisplayFor(modelItem => item.GenreTypes)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
