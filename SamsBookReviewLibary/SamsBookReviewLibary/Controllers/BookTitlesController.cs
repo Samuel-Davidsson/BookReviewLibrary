@@ -36,8 +36,9 @@ namespace SamsBookReviewLibary.Controllers
             //var listOfEnum = Enum.GetValues(typeof(Rating)).Cast<Rating>().ToList();
 
             var listOfReviews = _context.Reviews.Where(r => r.BookTitleID == id).ToList();
-            var list = listOfReviews.ToList();
-            ViewBag.Reviews = list;
+            ViewBag.Reviews = listOfReviews;
+            //var list = listOfReviews.ToList();
+            //ViewBag.Reviews = list;
 
             var listOfGenre = _context.BookTitleGenres.Where(r => r.BookTitleID == id).Select(r => r.Genre).ToList();
             ViewBag.Genres = listOfGenre;
