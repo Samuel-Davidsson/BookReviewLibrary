@@ -45,17 +45,13 @@ namespace SamsBookReviewLibary.Controllers
             return View(bookTitleGenres);
         }
 
-        // GET: BookTitleGenres/Create
         public IActionResult Create()
         {
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID");
-            ViewData["GenreID"] = new SelectList(_context.Genres, "GenreID", "GenreID");
+            ViewData["BookTitleID"] = new SelectList(_context.BookTitles.OrderBy(b =>b.Title), "BookTitleID", "Title");
+            ViewData["GenreID"] = new SelectList(_context.Genres.OrderBy(g =>g.GenreTypes), "GenreID", "GenreTypes");
             return View();
         }
 
-        // POST: BookTitleGenres/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookTitleGenresID,GenreID,BookTitleID")] BookTitleGenres bookTitleGenres)
@@ -84,14 +80,11 @@ namespace SamsBookReviewLibary.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookTitleID"] = new SelectList(_context.BookTitles, "BookTitleID", "BookTitleID", bookTitleGenres.BookTitleID);
-            ViewData["GenreID"] = new SelectList(_context.Genres, "GenreID", "GenreID", bookTitleGenres.GenreID);
+            ViewData["BookTitleID"] = new SelectList(_context.BookTitles.OrderBy(b =>b.Title), "BookTitleID", "Title", bookTitleGenres.BookTitleID);
+            ViewData["GenreID"] = new SelectList(_context.Genres.OrderBy(g =>g.GenreTypes), "GenreID", "GenreTypes", bookTitleGenres.GenreID);
             return View(bookTitleGenres);
         }
 
-        // POST: BookTitleGenres/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BookTitleGenresID,GenreID,BookTitleID")] BookTitleGenres bookTitleGenres)

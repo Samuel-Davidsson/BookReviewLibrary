@@ -13,16 +13,16 @@
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="BookTitleGenresID" />
         <dt>
-            @Html.DisplayNameFor(model => model.BookTitle)
+            @Html.DisplayNameFor(model => model.BookTitle):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BookTitle.BookTitleID)
+            @Html.DisplayFor(model => model.BookTitle.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Genre):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Genre.GenreID)
+            @Html.DisplayFor(model => model.Genre.GenreTypes)
         </dd>
     </dl>
     
