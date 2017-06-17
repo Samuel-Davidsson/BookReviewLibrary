@@ -1,0 +1,55 @@
+@model IEnumerable<SamsBookReviewLibary.Models.Reviews>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Reviews:</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+<div class="review-image">
+    <img src="https://cached-images.bonnier.news/cms30/UploadedImages/2016/3/26/2e1927a4-699b-4c8d-ae5a-219d1cde8bef/bigOriginal.jpg?interpolation=lanczos-none&downsize=*:549&output-quality=80&output-format=webp" />
+    <p><b>Horace Engdahl</b></p>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookTitle):
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ratings):
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Summary):
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ratings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReviewsID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReviewsID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReviewsID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

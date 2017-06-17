@@ -1,0 +1,40 @@
+﻿@model HomeViewModel
+
+<div class="row carousel-holder" align="center">
+    <h2>Welcome to Sam´s library!</h2>
+    <h3>Here you can find a lot of golden berries.</h3>
+    <div class="col-md-12">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="slide-image" src="../Images/carousel1.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img class="slide-image" src="../Images/carousel2.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img class="slide-image" src="../Images/carousel3.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img class="slide-image" src="../Images/carousel4.jpg" alt="">
+                </div>
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+</div>    
+    @*<div class="row">
+
+    @foreach (var books in Model.BookTitles)
+    {
+        @Html.Partial("BookSummary", books)
+    }
+</div>*@
+

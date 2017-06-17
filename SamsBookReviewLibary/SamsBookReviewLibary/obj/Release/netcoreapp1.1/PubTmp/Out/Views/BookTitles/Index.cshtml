@@ -1,0 +1,16 @@
+@model IEnumerable<SamsBookReviewLibary.Models.BookTitle>
+
+    <div class="row">
+
+        <h1 align="center">Books</h1>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+
+        @foreach (var books in Model)
+        {
+            @Html.Partial("BookViewSummary", books)
+        }
+    </div>
+
+   

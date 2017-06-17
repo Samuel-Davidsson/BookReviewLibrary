@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\SamsBookReviewLibary20170617015014 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\SamsBookReviewLibary20170617030650 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\SamsLibrary - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\images\background.jpg" />
     <Content Include="wwwroot\images\carousel2.jpg" />
     <Content Include="wwwroot\images\carousel3.jpg" />
@@ -31,6 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

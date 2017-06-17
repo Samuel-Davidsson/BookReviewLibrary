@@ -1,0 +1,39 @@
+@model SamsBookReviewLibary.Models.AuthorBooks
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Authors books</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="AuthorBooksID" />
+        <div class="form-group">
+            <label asp-for="AuthorID" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="AuthorID" class="form-control" asp-items="ViewBag.AuthorID"></select>
+                <span asp-validation-for="AuthorID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="BookTitleID" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="BookTitleID" class="form-control" asp-items="ViewBag.BookTitleID"></select>
+                <span asp-validation-for="BookTitleID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+                <a asp-action="Index" class="btn btn-default">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

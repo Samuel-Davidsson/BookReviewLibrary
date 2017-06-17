@@ -1,0 +1,40 @@
+@model SamsBookReviewLibary.Models.BookTitleGenres
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>BookTitleGenres</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="GenreID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="GenreID" class ="form-control" asp-items="ViewBag.GenreID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="BookTitleID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="BookTitleID" class ="form-control" asp-items="ViewBag.BookTitleID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

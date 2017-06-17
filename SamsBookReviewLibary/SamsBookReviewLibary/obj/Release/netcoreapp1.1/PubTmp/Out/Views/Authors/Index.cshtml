@@ -1,0 +1,22 @@
+@model IEnumerable<SamsBookReviewLibary.Models.Author>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Authors</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div id="test" class="thumbnail">
+
+@foreach (var author in Model)
+{
+    @Html.Partial("AuthorSummary", author)
+
+}
+
+</div>

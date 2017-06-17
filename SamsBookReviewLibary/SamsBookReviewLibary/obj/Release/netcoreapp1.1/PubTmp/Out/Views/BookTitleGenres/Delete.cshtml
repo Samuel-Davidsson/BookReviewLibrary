@@ -1,0 +1,35 @@
+@model SamsBookReviewLibary.Models.BookTitleGenres
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BookTitleGenres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="BookTitleGenresID" />
+        <dt>
+            @Html.DisplayNameFor(model => model.BookTitle):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookTitle.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genre.GenreTypes)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>

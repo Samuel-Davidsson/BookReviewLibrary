@@ -1,0 +1,17 @@
+@model BookTitle
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail" id="test">
+        <img src="@Model.ImgThumbNail" alt="">
+        <div class="caption">
+            <h3>@Model.Title</h3>
+            <p>@Model.Sypnosis</p>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.BookTitleID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.BookTitleID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.BookTitleID">Delete</a>
+            </div>
+
+        </div>
+    </div>
+</div>

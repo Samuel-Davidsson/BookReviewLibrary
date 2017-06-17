@@ -1,0 +1,89 @@
+@model SamsBookReviewLibary.Models.BookTitle
+
+@{
+    ViewData["Title"] = "BookDetails";
+}
+
+<h2>Book Details</h2>
+
+<div>
+    <p>
+        <img src="@Model.ImgThumbNail" alt="@Model.Title Picture" />
+    </p>
+</div>
+<div class="thumbnail" align="left">
+    <dl>
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.Title):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate):
+        </dt>
+        <dd>
+            @Model.ReleaseDate.ToString("yyyy-MM-dd")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Language):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Language)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sypnosis):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sypnosis)
+        </dd>
+    </dl>
+    <p>
+    <h4>
+        Author:
+    </h4>
+    </p>
+    @if (ViewBag.AuthorBooks.Count > 0)
+    {
+        @foreach (var authors in ViewBag.AuthorBooks)
+        {
+            <div>
+                <a asp-controller="Authors" asp-action="Details" asp-route-id="@authors.AuthorID">@authors.LastName</a>
+            </div>
+        }
+    }
+
+    else
+    {
+        <div>No @Html.DisplayNameFor(Model => Model.AuthorBooks) was found. </div>
+    }
+
+    <h4>
+        Genre:
+    </h4>
+
+        @foreach (var genres in ViewBag.Genres)
+        {
+            <div>
+                <p>@genres.GenreTypes</p>
+            </div>
+        }
+
+    <h4>
+        Reviews:
+    </h4>
+
+    @foreach (var reviews in ViewBag.Reviews)
+    {
+        <div>
+            <p>@reviews.Ratings</p>
+        </div>
+    }
+    
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookTitleID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

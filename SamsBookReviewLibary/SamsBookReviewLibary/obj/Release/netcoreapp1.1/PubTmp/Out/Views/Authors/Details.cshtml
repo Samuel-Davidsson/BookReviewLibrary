@@ -1,0 +1,73 @@
+@model Author
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>AuthorDetails</h2>
+<div>
+    <p>
+        <img src="@Model.ImgThumbNail" alt="@Model.FirstName, @Model.LastName Picture" />
+    </p>
+</div>
+<div class="thumbnail" align="left" id="test">
+    <dl>
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.FirstName):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.LastName):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.BirthDate):
+        </dt>
+        <dd>
+            @Model.BirthDate.ToString("yyyy-MM-dd")
+        </dd>
+        <dt style="font-size:1.1em">
+            @Html.DisplayNameFor(model => model.Country):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Info):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+    </dl>
+    <p>
+        <h3>
+           WrittenBooks:
+        </h3>
+    </p>
+        @if (ViewBag.AuthorBooks.Count > 0)
+        {
+            @foreach (var books in ViewBag.AuthorBooks)
+            {
+                <div>
+                    <a asp-controller="BookTitles" asp-action="Details" asp-route-id="@books.BookTitleID">@books.Title</a>
+
+                </div>
+            }
+        }
+
+        else
+        {
+            <div>No @Html.DisplayNameFor(Model => Model.AuthorBooks) was found. </div>
+        }
+
+    
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.AuthorID">Edit</a> 
+    <a asp-action="Index" class="btn btn-default">Back to List</a>
+</div>
